@@ -1,0 +1,42 @@
+<% layout('../layouts/default') -%>
+<script  src='/javascripts/main.js' charset="utf-8"> </script>
+<style type="text/css" media="">
+	.center{
+	margin-right:auto;
+	margin-left:auto;
+	width: 700;
+	}
+</style>
+
+<div class='row well'>
+	<div class='span3'>
+		<form class='form'>
+			Hero
+			<br/>
+			<select id='hero'>
+				<option>Select Hero </option>
+				<option value='batman'>batman </option>
+				<option value='spiderman'>spiderman </option>
+			</select>
+
+			<p>Quotes</p>
+			<select id='quotes' size=12>
+			</select>
+			<input type='button' class='btn btn-success' id='post' value='Post'/>
+			<input type='button' class='btn btn-info' id='random' value='Random'/>
+		</form>
+	</div>
+
+	<div class="span8">
+		Posted Quotes
+		<ul id='posts' >
+			<% if (quotes && quotes.length) { %>
+				<% for (var q in quotes) { %>
+				<li> <%= quotes[q].quote + " - " + quotes[q].hero %></li>
+				<% }; %>
+			<% }; %>
+		</ul>
+	</div>
+</div>
+
+
