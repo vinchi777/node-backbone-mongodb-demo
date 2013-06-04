@@ -10,5 +10,6 @@ module.exports = function(app){
 
 	var quote = require('../app/controllers/quotes')
 	app.get('/', quote.index)
-	app.post('/quote', quote.create)
+	app.post('/quotes', quote.create)
+	app.delete('/quotes/:id', quote.destroy)
 }

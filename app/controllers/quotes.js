@@ -14,3 +14,9 @@ exports.create = function(req, res){
 	quote.save();
 	res.json(quote);
 }
+
+exports.destroy = function(req, res){
+	console.log("id: " + req.params.id);
+	Quote.find({ _id: req.params.id }).remove();
+	res.json({ message: "deleted" });
+}

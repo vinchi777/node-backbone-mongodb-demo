@@ -1,8 +1,9 @@
 $(function(){
 //Models
 	var QuoteModel = Backbone.Model.extend({
-		url: "/quote",
+		urlRoot: "/quotes",
 		defaults: {
+			id: null,
 			hero: '',
 			quote: ''
 		}
@@ -37,7 +38,8 @@ $(function(){
 	    events:{
 			'change #hero': "loadQuotes",
 		    'click #random': "randomQuote",
-			'click #post': "postQuote"
+			'click #post': "postQuote",
+			'click .remove': "removeQuote"
 		},
 		loadQuotes: function(env){
 			var result = quotes.getQuotes($(env.target).val());
@@ -60,7 +62,7 @@ $(function(){
 				var quote = new QuoteModel();
 				quote.save(details, {
 					success: function(model,response){
-						$("#posts").append("<li>" + that.quote_select.val() + " - " + q.get('hero') + "</li>");
+						$("#posts").append("<li>" + that.quote_select.val() + " - " + q.get('hero') + " <a href='#' class='remove' ><i id="+ response._id+" class='icon-remove-circle'></i></a></li>");
 					},
 					error: function(model, response){
 						console.log("Error");
@@ -69,6 +71,13 @@ $(function(){
 			}else{
 				alert("Please choose a quote.");
 			}
+		},
+		removeQuote: function(env){
+			var id = $(env.target).attr("id");
+			var quote = new QuoteModel({id: id});
+			quote.destroy({success: function(model, response){
+					$(env.target).closest("li").fadeOut();
+			}});
 		}
 	});
 	var quoteView = new QuoteView

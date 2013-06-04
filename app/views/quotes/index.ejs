@@ -32,7 +32,7 @@
 		<ul id='posts' >
 			<% if (quotes && quotes.length) { %>
 				<% for (var q in quotes) { %>
-				<li> <%= quotes[q].quote + " - " + quotes[q].hero %></li>
+				<li> <%= quotes[q].quote + " - " + quotes[q].hero %> <a href='#' class="remove" ><i id="<%= quotes[q].id %>" class='icon-remove-circle'></i></a></li>
 				<% }; %>
 			<% }; %>
 		</ul>
